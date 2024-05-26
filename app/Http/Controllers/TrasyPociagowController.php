@@ -26,14 +26,15 @@ class TrasyPociagowController extends Controller
     public function index()
     {
         $trasy = Trasy::all();
-        $stacjaPoczatkowa = null; // Ustawiamy wartość początkową na null
-        $stacjaKoncowa = null; // Ustawiamy wartość początkową na null
-        $data = null; // Ustawiamy wartość początkową na null
-        $godzinaOdjazdu = null; // Ustawiamy wartość początkową na null
-        $godzinaPrzyjazdu = null; // Ustawiamy wartość początkową na null
+        $stacjaPoczatkowa = null; 
+        $stacjaKoncowa = null; 
+        $data = null; 
+        $godzinaOdjazdu = null; 
+        $godzinaPrzyjazdu = null; 
     
         return view('trasy_pociagow.index', compact('trasy', 'stacjaPoczatkowa', 'stacjaKoncowa', 'data', 'godzinaOdjazdu', 'godzinaPrzyjazdu'));
     }
+
     public function szukaj(Request $request)
     {
         $stacjaPoczatkowa = $request->input('from');
@@ -45,8 +46,8 @@ class TrasyPociagowController extends Controller
                       ->first();
     
         if ($trasa) {
-            $godzinaOdjazdu = $trasa->godzina_odjazdu;
-            $godzinaPrzyjazdu = $trasa->godzina_przyjazdu;
+            $godzinaOdjazdu = $trasa->Godzina_odjazdu;
+            $godzinaPrzyjazdu = $trasa->Godzina_przyjazdu;
     
             return view('trasy_pociagow.index', compact('stacjaPoczatkowa', 'stacjaKoncowa', 'data', 'godzinaOdjazdu', 'godzinaPrzyjazdu'));
         } else {
@@ -54,12 +55,25 @@ class TrasyPociagowController extends Controller
         }
     }
     
-    public function kupBilet()
+    public function kupBilet(Request $request)
+{
+    
+    $stacjaPoczatkowa = $request->input('from');
+    $stacjaKoncowa = $request->input('to');
+    $data = $request->input('date');
+    $godzinaOdjazdu = $request->input('godzina_odjazdu');
+    $godzinaPrzyjazdu = $request->input('godzina_przyjazdu');
+
+
+
+
+    return view('kup_bilet', compact('stacjaPoczatkowa', 'stacjaKoncowa', 'data', 'godzinaOdjazdu', 'godzinaPrzyjazdu'));
+}
+
+    public function showKupBilet()
     {
         $bilety = Bilet::with('uzytkownik')->get();
         return view('kup_bilet', ['bilety' => $bilety]);
     }
     
-    }
-
-
+}

@@ -17,9 +17,14 @@ class Trasy extends Model
         'Czas_podrozy',
         'Opoznienie',
         'Trasa_w_km',
-        'cala_trasa_id',
         'Godzina_odjazdu',
         'Godzina_przyjazdu',
+        'cala_trasa_id',
         
     ];
+    public function calaTrasa()
+    {
+        return $this->belongsTo(CalaTrasa::class, 'cala_trasa_id');
+    }
 }
+

@@ -17,23 +17,23 @@
                         <form action="{{ route('trasy_pociagow.szukaj') }}" method="GET" class="form-inline mb-4 d-flex align-items-center">
                             @csrf
                             <div class="form-group mr-2">
-                                <select name="from" id="from" class="form-control" placeholder="Z">
-                                    <option value="">Wybierz stację początkową</option>
-                                    @foreach($trasy as $trasa)
-                                        <option value="{{ $trasa->Stacja_poczatkowa }}">{{ $trasa->Stacja_poczatkowa }}</option>
-                                    @endforeach
-                                </select>
+                            <select name="from" id="from" class="form-control" placeholder="Z">
+    <option value="">Wybierz stację początkową</option>
+    @foreach($trasy->pluck('Stacja_poczatkowa')->unique() as $stacja)
+        <option value="{{ $stacja }}">{{ $stacja }}</option>
+    @endforeach
+</select>
                             </div>
                             <button type="button" id="switchBtn" class="btn btn-secondary mr-2">
                                 <img src="{{ asset('images/arrows_7846830.png') }}" alt="Switch" width="20" height="20">
                             </button>
                             <div class="form-group mr-2">
-                                <select name="to" id="to" class="form-control" placeholder="DO">
-                                    <option value="">Wybierz stację docelową</option>
-                                    @foreach($trasy as $trasa)
-                                        <option value="{{ $trasa->Stacja_koncowa }}">{{ $trasa->Stacja_koncowa }}</option>
-                                    @endforeach
-                                </select>
+                            <select name="to" id="to" class="form-control" placeholder="DO">
+    <option value="">Wybierz stację docelową</option>
+    @foreach($trasy->pluck('Stacja_koncowa')->unique() as $stacja)
+        <option value="{{ $stacja }}">{{ $stacja }}</option>
+    @endforeach
+</select>
                             </div>
                             <div class="form-group mr-2">
                                 <input type="date" name="date" id="date" class="form-control" placeholder="Kiedy?">

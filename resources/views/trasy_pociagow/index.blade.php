@@ -2,18 +2,21 @@
 
 @section('content')
 <div class="container">
-    <h1>Wybrane trasy</h1>
-    <p>{{ $stacjaPoczatkowa }} >
-     {{ $stacjaKoncowa }}</p>
-    <p>Data: {{ $data }}</p>
-    <div style="display: flex; justify-content: space-between;">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
         <div>
-            <p>Godzina odjazdu: {{ $godzinaOdjazdu }}</p>
-            <p>Godzina przyjazdu: {{ $godzinaPrzyjazdu }}</p>
+            <h1>Wybrane trasy</h1>
+            <p>{{ $stacjaPoczatkowa }} > {{ $stacjaKoncowa }}</p>
+            <p>Data: {{ $data }}</p>
+            <div>
+                <p>{{ $godzinaOdjazdu }}>
+                 {{ $godzinaPrzyjazdu }}</p>
+            </div>
+        </div>
+        <div style="margin-right: 20px;">
+            <img src="{{ asset('images/information_10015217.png') }}" alt="Switch" width="20" height="20">
+            <a href="{{ route('kup_bilet') }}" style="color: blue;">Kup bilet</a>
         </div>
     </div>
-    <div style="float:right;">
-        <a href="{{ route('kup_bilet') }}" style="color: blue;">Kup bilet</a>
-    </div>
 </div>
+<link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 @endsection

@@ -7,13 +7,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Trasy;
 use App\Models\Stacje;
+use App\Models\CalaTrasa;
 
 class TrasaController extends Controller
 {
-    public function index(){
-        $trasy = Trasy::all();
+    public function index()
+    {
+        $trasy = Trasy::with('calaTrasa')->get();
         return view('trasy.index', ['trasy' => $trasy]);
     }
+    
 
     public function create()
     {
@@ -32,8 +35,8 @@ class TrasaController extends Controller
             'Godzina_odjazdu' => 'required|date_format:H:i',
             'Godzina_przyjazdu' => 'required|date_format:H:i',
         ]);
-        $data['cala_trasa_id'] = null;
-
+       
+        
         Trasy::create($data);
 
         return redirect(route('trasy.index'))->with('success', 'Trasa została dodana pomyślnie');
@@ -52,9 +55,10 @@ class TrasaController extends Controller
             'Czas_podrozy' => 'required',
             'Opoznienie' => 'required',
             'Trasa_w_km' => 'required|numeric',
-           // 'cala_trasa_id' => 'required',
-            'Godzina_odjazdu' => 'required|date_format:H:i',
-            'Godzina_przyjazdu' => 'required|date_format:H:i',
+          //  'cala_trasa_id' => 'required',
+          'Godzina_odjazdu' => 'required|date_format:H:i:s',
+          'Godzina_przyjazdu' => 'required|date_format:H:i:s',
+          
         ]);
 
         $trasa = Trasy::findOrFail($id);
@@ -68,4 +72,6 @@ class TrasaController extends Controller
         $trasa->delete();
         return redirect(route('trasy.index'))->with('success', 'Trasa usunięta pomyślnie');
     }
+   
+
 }

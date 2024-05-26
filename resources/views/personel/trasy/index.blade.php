@@ -35,8 +35,8 @@
                     <td>{{ $trasa->Opoznienie }}</td>
                     <td>{{ $trasa->Trasa_w_km }}</td>
                   
-                    <td>{{ $trasa->godzina_odjazdu }}</td>
-                    <td>{{ $trasa->godzina_przyjazdu }}</td>
+                    <td>{{ $trasa->Godzina_odjazdu }}</td>
+                    <td>{{ $trasa->Godzina_przyjazdu }}</td>
                     <td>
                         <a href="{{ route('trasy.edit', ['trasy' => $trasa->id]) }}">Edycja</a>
                     </td>
