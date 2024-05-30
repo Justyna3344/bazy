@@ -13,6 +13,7 @@ use App\Http\Controllers\TrasaController;
 use App\Http\Controllers\StacjeController;
 use App\Http\Controllers\RelacjeController;
 use App\Http\Controllers\RouteController;
+use App\Http\Controllers\PrzystanekController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -73,10 +74,17 @@ Route::delete('/stacje/{stacje}', [StacjeController::class, 'destroy'])->name('S
 Route::get('/relacje', [RelacjeController::class, 'index'])->name('relacje.index');
 Route::get('/relacje/create', [RelacjeController::class, 'create'])->name('relacje.create');
 Route::post('/relacje', [RelacjeController::class, 'store'])->name('relacje.store');
+Route::get('/relacje/{relacja}', [RelacjeController::class, 'show'])->name('relacje.show');
 Route::get('/relacje/{relacja}/edit', [RelacjeController::class, 'edit'])->name('relacje.edit');
 Route::put('/relacje/{relacja}', [RelacjeController::class, 'update'])->name('relacje.update');
 Route::delete('/relacje/{relacja}', [RelacjeController::class, 'destroy'])->name('relacje.destroy');
+Route::get('/relacje/{id}', [RelacjeController::class, 'show'])->name('relacje.show');
 
 Route::get('/trasy/{id}/details', [TrasyPociagowController::class, 'showDetails'])->name('trasy.details');
 
+
 Route::get('/routes/{calaTrasaId}/stops', [RouteController::class, 'showRouteStops'])->name('routes.stops');
+
+Route::get('/przystanek', [PrzystanekController::class, 'index'])->name('przystanek'); // Zaktualizowano ścieżkę do kontrolera PrzystanekController
+Route::get('/przystanki', [PrzystanekController::class, 'index'])->name('przystanki.index');
+Route::get('/szczegoly', [SzczegolyController::class, 'index'])->name('szczegoly.index');

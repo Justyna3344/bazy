@@ -26,8 +26,16 @@ class RelacjeController extends Controller
         return redirect(route('relacje.index'));
     }
 
-    public function show(Relacje $relacja){
-        return view('relacje.show', ['relacja' => $relacja]);
+    public function show($id)
+    {
+        // Pobierz relację o danym ID
+        $relacja = Relacje::findOrFail($id);
+        
+        // Pobierz wszystkie trasy dla danej relacji
+        $trasy = Trasy::where('cala_trasa_id', $id)->get();
+        
+        // Zwróć widok z danymi relacji i przystankami
+        return view('relacje.show', compact('relacja', 'trasy'));
     }
 
     public function edit(Relacje $relacja){
@@ -48,5 +56,6 @@ class RelacjeController extends Controller
         $relacja->delete();
         return redirect(route('relacje.index'))->with('success', 'Relacja usunięta pomyślnie');
     }
+    
 }
 

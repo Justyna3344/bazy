@@ -41,15 +41,12 @@ class TrasyPociagowController extends Controller
         $stacjaKoncowa = $request->input('to');
         $data = $request->input('date');
     
-        $trasa = Trasy::where('Stacja_poczatkowa', $stacjaPoczatkowa)
+        $trasy = Trasy::where('Stacja_poczatkowa', $stacjaPoczatkowa)
                       ->where('Stacja_koncowa', $stacjaKoncowa)
-                      ->first();
+                      ->get();
     
-        if ($trasa) {
-            $godzinaOdjazdu = $trasa->Godzina_odjazdu;
-            $godzinaPrzyjazdu = $trasa->Godzina_przyjazdu;
-    
-            return view('trasy_pociagow.index', compact('stacjaPoczatkowa', 'stacjaKoncowa', 'data', 'godzinaOdjazdu', 'godzinaPrzyjazdu'));
+        if ($trasy->isNotEmpty()) {
+            return view('trasy_pociagow.index', compact('trasy', 'stacjaPoczatkowa', 'stacjaKoncowa', 'data'));
         } else {
             return redirect()->back()->with('error', 'Nie znaleziono trasy dla podanych stacji.');
         }
