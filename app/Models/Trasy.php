@@ -2,13 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Trasy extends Model
 {
-    use HasFactory;
-
     protected $table = 'Trasy';
 
     protected $fillable = [
@@ -20,8 +17,18 @@ class Trasy extends Model
         'Godzina_odjazdu',
         'Godzina_przyjazdu',
         'cala_trasa_id',
-        
     ];
+
+    public function stacjaPoczatkowa()
+    {
+        return $this->belongsTo(Stacje::class, 'Stacja_poczatkowa', 'Nazwa');
+    }
+
+    public function stacjaKoncowa()
+    {
+        return $this->belongsTo(Stacje::class, 'Stacja_koncowa', 'Nazwa');
+    }
+
     public function calaTrasa()
     {
         return $this->belongsTo(CalaTrasa::class, 'cala_trasa_id');

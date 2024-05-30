@@ -19,31 +19,34 @@ class RelacjeController extends Controller
     public function store(Request $request){
         $data = $request->validate([
             'Nazwa' => 'required',
-        
         ]);
 
-        $newRelacje = Relacje::create($data);
+        Relacje::create($data);
 
-        return redirect(route('Relacje.index'));
+        return redirect(route('relacje.index'));
     }
 
-    public function edit(Relacje $relacje){
-        return view('relacje.edit', ['relacje' => $relacje]);
+    public function show(Relacje $relacja){
+        return view('relacje.show', ['relacja' => $relacja]);
     }
 
-    public function update(Relacje $relacje, Request $request){
+    public function edit(Relacje $relacja){
+        return view('relacje.edit', ['relacja' => $relacja]);
+    }
+
+    public function update(Relacje $relacja, Request $request){
         $data = $request->validate([
             'Nazwa' => 'required',
-          
         ]);
 
-        $personel->update($data);
+        $relacja->update($data);
 
-        return redirect(route('Relacje.index'))->with('success', 'relacje zedytowano pomyslnie');
+        return redirect(route('relacje.index'))->with('success', 'Relacja zaktualizowana pomyślnie');
     }
 
-    public function destroy(Relacje $relacje){
-        $relacje->delete();
-        return redirect(route('Relacje.index'))->with('success', 'relacje usunieto pomyslnie');
+    public function destroy(Relacje $relacja){
+        $relacja->delete();
+        return redirect(route('relacje.index'))->with('success', 'Relacja usunięta pomyślnie');
     }
 }
+

@@ -12,6 +12,7 @@ use App\Http\Controllers\PersonelController;
 use App\Http\Controllers\TrasaController;
 use App\Http\Controllers\StacjeController;
 use App\Http\Controllers\RelacjeController;
+use App\Http\Controllers\RouteController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -69,11 +70,13 @@ Route::get('/stacje/{stacje}/edit', [StacjeController::class, 'edit'])->name('St
 Route::put('/stacje/{stacje}', [StacjeController::class, 'update'])->name('Stacje.update');
 Route::delete('/stacje/{stacje}', [StacjeController::class, 'destroy'])->name('Stacje.destroy');
 
-Route::get('/relacje', [RelacjeController::class, 'index'])->name('Relacje.index');
-Route::get('/relacje/create', [RelacjeController::class, 'create'])->name('Relacje.create');
-Route::post('/relacje', [RelacjeController::class, 'store'])->name('Relacje.store');
-Route::get('/relacje/{relacje}/edit', [RelacjeController::class, 'edit'])->name('Relacje.edit');
-Route::put('/relacje/{relacje}', [RelacjeController::class, 'update'])->name('Relacje.update');
-Route::delete('/relacje/{relacje}', [RelacjeController::class, 'destroy'])->name('Relacje.destroy');
+Route::get('/relacje', [RelacjeController::class, 'index'])->name('relacje.index');
+Route::get('/relacje/create', [RelacjeController::class, 'create'])->name('relacje.create');
+Route::post('/relacje', [RelacjeController::class, 'store'])->name('relacje.store');
+Route::get('/relacje/{relacja}/edit', [RelacjeController::class, 'edit'])->name('relacje.edit');
+Route::put('/relacje/{relacja}', [RelacjeController::class, 'update'])->name('relacje.update');
+Route::delete('/relacje/{relacja}', [RelacjeController::class, 'destroy'])->name('relacje.destroy');
+
 Route::get('/trasy/{id}/details', [TrasyPociagowController::class, 'showDetails'])->name('trasy.details');
 
+Route::get('/routes/{calaTrasaId}/stops', [RouteController::class, 'showRouteStops'])->name('routes.stops');

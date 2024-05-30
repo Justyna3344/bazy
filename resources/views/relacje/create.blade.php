@@ -3,32 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="{{ asset ('assets/css/createstyles.css')}}" rel="stylesheet">
+    <title>Dodaj relacje</title>
+    <link href="{{ asset('assets/css/createstyles.css') }}" rel="stylesheet">
 </head>
 <body>
-<h1>Dodaj relacje</h1>
+    <h1>Dodaj relacje</h1>
     <div>
         @if($errors->any())
             <ul>
                 @foreach($errors->all() as $error)
-                    <li>{{$error}}</li>
+                    <li>{{ $error }}</li>
                 @endforeach    
             </ul>
-
         @endif
     </div>
-    <form method="post" action="{{route('Relacje.store')}}">
+    <form method="post" action="{{ route('relacje.store') }}">
         @csrf
-        @method('post')
         <div>
-            <label></label>
-            <input type="text" name="Nazwa" placeholder="Rola"/>
-        </div>
-     
+            <label>Nazwa:</label>
+            <input type="text" name="Nazwa" placeholder="Nazwa"/>
         </div>
         <div class="DodajWagon">
-            <input type="submit" value="Dodaj relacje">
+            <button type="submit">Dodaj relacje</button>
         </div>
     </form>
 </body>

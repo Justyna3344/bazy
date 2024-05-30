@@ -9,11 +9,10 @@ class Relacje extends Model
 {
     use HasFactory;
 
-    protected $table = 'Relacje';
+    protected $table = 'relacje';
+
+    protected $primaryKey = 'idRelacje';
 
     protected $fillable = [
-        'Nazwa',
-        
-    ];
-
+        'Nazwa', ];
 }

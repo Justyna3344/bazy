@@ -7,16 +7,21 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stacje extends Model
 {
-    use HasFactory;
-
-    protected $table = 'stacje'; // Zmiana nazwy tabeli na 'stacje'
+    protected $table = 'stacje';
 
     protected $fillable = [
         'Nazwa',
         'l_peronow',
         'l_torow',
-        
-      
-        
     ];
+
+    public function trasyPoczatkowe()
+    {
+        return $this->hasMany(Trasy::class, 'Stacja_poczatkowa', 'Nazwa');
+    }
+
+    public function trasyKoncowe()
+    {
+        return $this->hasMany(Trasy::class, 'Stacja_koncowa', 'Nazwa');
+    }
 }

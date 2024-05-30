@@ -3,35 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edytuj relacje</title>
-    <link href="{{ asset ('assets/css/editstyles.css')}}" rel="stylesheet">
+    <title>Relacje</title>
+    <link href="{{ asset('assets/css/indexstyles.css') }}" rel="stylesheet">
 </head>
 <body>
-    <h1>Edytuj relacje</h1>
-
-    <div>
-        @if($errors->any())
-            <ul>
-                @foreach($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach    
-            </ul>
-        @endif
+    <h1>Relacje</h1>
+    <div class="add-wagon-link">
+        <a href="{{ route('relacje.create') }}">Dodaj relacje</a>
     </div>
-
-    <form method="post" action="{{ route('Relacje.update', ['relacje' => $relacje->idRelacje]) }}">
-        @csrf
-        @method('PUT')
-
-        <div>
-            <label>Rola:</label>
-            <input type="text" name="Nazwa" placeholder="Rola" value="{{ $relacja->Nazwa }}" />
-        </div>
-       
-
-        <div class="EdytujWagon">
-        <input type="submit" value="Edytuj relacje">
-        </div>
-    </form>
+    <div>
+        <table border="1">
+            <tr>
+                <th>ID</th>
+                <th>Nazwa</th>
+                <th>Akcje</th>
+            </tr>
+            @foreach($relacje as $relacja)
+                <tr>
+                    <td>{{ $relacja->idRelacje }}</td>
+                    <td>{{ $relacja->Nazwa }}</td>
+                    <td>
+                        <a href="{{ route('relacje.edit', ['relacja' => $relacja->idRelacje]) }}">Edytuj</a>
+                        <form method="post" action="{{ route('relacje.destroy', ['relacja' => $relacja->idRelacje]) }}">
+                            @csrf
+                            @method('delete')
+                            <button type="submit">Usuń</button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </table>
+    </div>
 </body>
 </html>

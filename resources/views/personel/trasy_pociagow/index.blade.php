@@ -14,6 +14,10 @@
     </div>
     <div style="float:right;">
         <a href="{{ route('kup_bilet') }}" style="color: blue;">Kup bilet</a>
+        <a href="#">
+    <img src="{{ asset('images/information_10015217.png') }}" alt="Opis obrazka">
+</a>
+
     </div>
 </div>
 @endsection
