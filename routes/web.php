@@ -14,8 +14,12 @@ use App\Http\Controllers\StacjeController;
 use App\Http\Controllers\RelacjeController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\PrzystanekController;
-use App\Http\Controllers\BiletController;
-use App\Http\Controllers\ZakupBiletuController;
+use App\Http\Controllers\User\UserController;
+use App\Http\Controllers\Middleware\UserMiddleware;
+use App\Http\Controllers\Middleware\AdminMiddleware;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\TicketsController;
+use App\Http\Controllers\UsersmngrController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -91,10 +95,33 @@ Route::get('/przystanek', [PrzystanekController::class, 'index'])->name('przysta
 Route::get('/przystanki', [PrzystanekController::class, 'index'])->name('przystanki.index');
 Route::get('/szczegoly', [SzczegolyController::class, 'index'])->name('szczegoly.index');
 
-Route::get('/pobierz-przystanki', 'App\Http\Controllers\PrzystanekController@index');
+Route::get('usersmngr', [UsersmngrController::class, 'index'])->name('usersmngr.index');
 
-Route::post('/kup-bilet', [BiletController::class, 'kupBilet']);
-Route::get('/kup-bilet-step-1', [ZakupBiletuController::class, 'step1'])->name('kup-bilet-step-1');
-Route::get('/kup-bilet-step-2', [ZakupBiletuController::class, 'step2'])->name('kup-bilet-step-2');
-Route::post('/kup-bilet-step-3', [ZakupBiletuController::class, 'step3'])->name('kup-bilet-step-3');
-Route::post('/zakup-biletu/store', [ZakupBiletuController::class, 'store'])->name('zakup-biletu.store');
+
+
+Auth::routes(['verify' => true]);
+
+Route::get('/home', [HomeController::class, 'index'])->name('home')->middleware('verified');
+
+//Tickety i zarządzanie użytkownikami
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('tickets', [AdminController::class, 'tickets'])->name('tickets');
+    Route::get('usersmngr', [AdminController::class, 'usersmngr'])->name('usersmngr');
+});
+
+// User routes
+Route::middleware(['auth', 'user'])->group(function(){
+    Route::get('/home', [UserController::class, 'index'])->name('home');
+});
+
+// Admin routes
+Route::middleware(['auth', 'admin'])->group(function(){
+    Route::get('/dashboard', [AdminController::class, 'index'])->name('admin.dashboard');
+});
+
+
+
+Route::middleware(['auth', 'admin'])->group(function () {
+    Route::get('tickets', [AdminController::class, 'tickets'])->name('tickets');
+    Route::resource('usersmngr', UsersmngrController::class);
+});

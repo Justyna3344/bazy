@@ -3,19 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dodaj Relację</title>
+    <title>Dodaj relacje</title>
     <link href="{{ asset('assets/css/createstyles.css') }}" rel="stylesheet">
 </head>
 <body>
-    <h1>Dodaj Relację</h1>
+    <h1>Dodaj relacje</h1>
+    <div>
+        @if($errors->any())
+            <ul>
+                @foreach($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach    
+            </ul>
+        @endif
+    </div>
     <form method="post" action="{{ route('relacje.store') }}">
         @csrf
         <div>
             <label>Nazwa:</label>
-            <input type="text" name="Nazwa" placeholder="Nazwa" required />
+            <input type="text" name="Nazwa" placeholder="Nazwa"/>
         </div>
-        <div>
-            <button type="submit">Dodaj</button>
+        <div class="DodajWagon">
+            <button type="submit">Dodaj relacje</button>
         </div>
     </form>
 </body>

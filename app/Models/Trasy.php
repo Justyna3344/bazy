@@ -19,6 +19,16 @@ class Trasy extends Model
         'cala_trasa_id',
     ];
 
+    public function stacjaPoczatkowa()
+    {
+        return $this->belongsTo(Stacje::class, 'Stacja_poczatkowa', 'Nazwa');
+    }
+
+    public function stacjaKoncowa()
+    {
+        return $this->belongsTo(Stacje::class, 'Stacja_koncowa', 'Nazwa');
+    }
+
     public function calaTrasa()
     {
         return $this->belongsTo(CalaTrasa::class, 'cala_trasa_id');
