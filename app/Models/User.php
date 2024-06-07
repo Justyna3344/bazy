@@ -44,4 +44,10 @@ class User extends Authenticatable implements MustVerifyEmail
             'password' => 'hashed',
         ];
     }
+    // User.php
+public function znizki()
+{
+    return $this->belongsToMany(Znizka::class, 'user_znizka', 'user_id', 'znizka_id');
+}
+
 }

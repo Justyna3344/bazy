@@ -14,6 +14,8 @@ use App\Http\Controllers\StacjeController;
 use App\Http\Controllers\RelacjeController;
 use App\Http\Controllers\RouteController;
 use App\Http\Controllers\PrzystanekController;
+use App\Http\Controllers\BiletController;
+use App\Http\Controllers\ZakupBiletuController;
 
 Route::get('/', function () {
     return view('welcome');
@@ -88,3 +90,11 @@ Route::get('/routes/{calaTrasaId}/stops', [RouteController::class, 'showRouteSto
 Route::get('/przystanek', [PrzystanekController::class, 'index'])->name('przystanek'); // Zaktualizowano ścieżkę do kontrolera PrzystanekController
 Route::get('/przystanki', [PrzystanekController::class, 'index'])->name('przystanki.index');
 Route::get('/szczegoly', [SzczegolyController::class, 'index'])->name('szczegoly.index');
+
+Route::get('/pobierz-przystanki', 'App\Http\Controllers\PrzystanekController@index');
+
+Route::post('/kup-bilet', [BiletController::class, 'kupBilet']);
+Route::get('/kup-bilet-step-1', [ZakupBiletuController::class, 'step1'])->name('kup-bilet-step-1');
+Route::get('/kup-bilet-step-2', [ZakupBiletuController::class, 'step2'])->name('kup-bilet-step-2');
+Route::post('/kup-bilet-step-3', [ZakupBiletuController::class, 'step3'])->name('kup-bilet-step-3');
+Route::post('/zakup-biletu/store', [ZakupBiletuController::class, 'store'])->name('zakup-biletu.store');

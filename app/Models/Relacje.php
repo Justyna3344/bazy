@@ -16,3 +16,8 @@ class Relacje extends Model
     protected $fillable = [
         'Nazwa', ];
 }
+public function trasy()
+{
+    return $this->hasMany(Trasy::class, 'cala_trasa_id');
+}
+?>

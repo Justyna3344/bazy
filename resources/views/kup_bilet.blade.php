@@ -14,6 +14,9 @@
     </div>
 
     <!-- Przycisk Dodaj użytkownika -->
-    <a class="btn-add-user" href="/dodaj-uzytkownika">+ Dodaj osobę</a>
+    <a class="btn-add-user" href="/dodaj-uzytkownika">+ Dodaj osobę</a><hr>
+
+    <!-- Przycisk Dalej -->
+    <a class="btn btn-primary" href="{{ route('kup-bilet-step-2') }}">Dalej</a>
 </div>
 @endsection

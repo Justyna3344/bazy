@@ -7,6 +7,11 @@ use App\Models\Relacje;
 
 class RelacjeController extends Controller
 {
+    public function getRelacjeByTrasa($trasaId)
+    {
+        $relacje = Relacje::where('trasa_id', $trasaId)->get();
+        return response()->json($relacje);
+    }
     public function index(){
         $relacje = Relacje::all();
         return view('relacje.index', ['relacje' => $relacje]);
@@ -27,16 +32,16 @@ class RelacjeController extends Controller
     }
 
     public function show($id)
-    {
-        // Pobierz relację o danym ID
-        $relacja = Relacje::findOrFail($id);
-        
-        // Pobierz wszystkie trasy dla danej relacji
-        $trasy = Trasy::where('cala_trasa_id', $id)->get();
-        
-        // Zwróć widok z danymi relacji i przystankami
-        return view('relacje.show', compact('relacja', 'trasy'));
-    }
+{
+    // Pobierz relację
+    $relacja = Relacje::findOrFail($id);
+
+    // Pobierz wszystkie trasy dla danej relacji wraz z przystankami
+    $trasy = Trasy::where('cala_trasa_id', $relacja->id)->get();
+
+    // Przekazanie danych do widoku
+    return view('relacje.show', compact('relacja', 'trasy'));
+}
 
     public function edit(Relacje $relacja){
         return view('relacje.edit', ['relacja' => $relacja]);
