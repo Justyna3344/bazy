@@ -1,3 +1,6 @@
+@extends('layouts.app')
+
+@section('content')
 create.blade.php
 
 <!DOCTYPE html>
@@ -68,3 +71,4 @@ create.blade.php
     </form>
 </body>
 </html>
+@endsection
