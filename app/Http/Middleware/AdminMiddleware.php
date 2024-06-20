@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware;
 
+use App\Models\User;
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -20,4 +21,9 @@ class AdminMiddleware
 
         return redirect()->route('admin.dashboard');
     }
+    public function index()
+{
+    $userCount = User::count();
+    return view('nazwa-widoku', compact('userCount'));
+}
 }

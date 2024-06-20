@@ -1,9 +1,9 @@
 <?php
- 
 namespace App\Http\Controllers;
- 
+
 use Illuminate\Http\Request;
 use App\Models\Tickets;
+
 class TicketsController extends Controller
 {
     /**
@@ -13,10 +13,10 @@ class TicketsController extends Controller
      */
     public function index()
     {
-        $tickets= Tickets::all();
+        $tickets = Tickets::all();
         return view('tickets.index')->with('tickets', $tickets);
     }
- 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -26,7 +26,7 @@ class TicketsController extends Controller
     {
         return view('tickets.create');
     }
- 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -36,10 +36,14 @@ class TicketsController extends Controller
     public function store(Request $request)
     {
         $input = $request->all();
+        // Upewnij się, że ticket_quantity jest ustawione, lub ustaw wartość domyślną
+        if (!isset($input['ticket_quantity'])) {
+            $input['ticket_quantity'] = 1; // Wartość domyślna
+        }
         Tickets::create($input);
-        return redirect('tickets')->with('flash_message', 'Dodano bilet');  
+        return redirect('tickets')->with('flash_message', 'Dodano bilet');
     }
- 
+
     /**
      * Display the specified resource.
      *
@@ -51,7 +55,7 @@ class TicketsController extends Controller
         $tickets = Tickets::find($id);
         return view('tickets.show')->with('tickets', $tickets);
     }
- 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -63,7 +67,7 @@ class TicketsController extends Controller
         $tickets = Tickets::find($id);
         return view('tickets.edit')->with('tickets', $tickets);
     }
- 
+
     /**
      * Update the specified resource in storage.
      *
@@ -76,9 +80,9 @@ class TicketsController extends Controller
         $tickets = Tickets::find($id);
         $input = $request->all();
         $tickets->update($input);
-        return redirect('admin/tickets')->with('flash_message', 'Zaktualizowano bilet');  
+        return redirect('tickets')->with('flash_message', 'Zaktualizowano bilet');
     }
- 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -88,6 +92,6 @@ class TicketsController extends Controller
     public function destroy($id)
     {
         Tickets::destroy($id);
-        return redirect('admin/tickets')->with('flash_message', 'Usunięto bilet');  
+        return redirect('admin/tickets')->with('flash_message', 'Usunięto bilet');
     }
 }

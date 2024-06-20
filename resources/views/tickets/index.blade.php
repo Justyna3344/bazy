@@ -2,6 +2,11 @@
 
 @section('content')
     <div class="container">
+        @if (session('flash_message'))
+            <div class="alert alert-success">
+                {{ session('flash_message') }}
+            </div>
+        @endif
         <div class="row" style="margin:20px;">
             <div class="col-12">
                 <div class="card">

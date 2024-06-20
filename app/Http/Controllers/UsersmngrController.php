@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Usersmngr;
 
-
 class UsersmngrController extends Controller
 {
     /**
@@ -16,9 +15,9 @@ class UsersmngrController extends Controller
     public function index()
     {
         $users = Usersmngr::all();
-        return view ('usersmngr.index')->with('users', $users);
+        return view('usersmngr.index', compact('users'));
     }
- 
+
     /**
      * Show the form for creating a new resource.
      *
@@ -28,7 +27,7 @@ class UsersmngrController extends Controller
     {
         return view('usersmngr.create');
     }
- 
+
     /**
      * Store a newly created resource in storage.
      *
@@ -39,9 +38,9 @@ class UsersmngrController extends Controller
     {
         $input = $request->all();
         Usersmngr::create($input);
-        return redirect('usersmngr')->with('flash_message', 'Dodano użytkownika');  
+        return redirect()->route('usersmngr.index')->with('flash_message', 'Dodano użytkownika');
     }
- 
+
     /**
      * Display the specified resource.
      *
@@ -50,10 +49,10 @@ class UsersmngrController extends Controller
      */
     public function show($id)
     {
-        $users = Usersmngr::find($id);
-        return view('usersmngr.show')->with('users', $users);
+        $user = Usersmngr::find($id);
+        return view('usersmngr.show', compact('user'));
     }
- 
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -62,10 +61,10 @@ class UsersmngrController extends Controller
      */
     public function edit($id)
     {
-        $users = Usersmngr::find($id);
-        return view('usersmngr.edit')->with('users', $users);
+        $user = Usersmngr::find($id);
+        return view('usersmngr.edit', compact('user'));
     }
- 
+
     /**
      * Update the specified resource in storage.
      *
@@ -75,12 +74,12 @@ class UsersmngrController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $users = Usersmngr::find($id);
+        $user = Usersmngr::find($id);
         $input = $request->all();
-        $users->update($input);
-        return redirect('usersmngr')->with('flash_message', 'Zaktuallizowano użytkownika');  
+        $user->update($input);
+        return redirect()->route('usersmngr.index')->with('flash_message', 'Zaktualizowano użytkownika');
     }
- 
+
     /**
      * Remove the specified resource from storage.
      *
@@ -90,13 +89,13 @@ class UsersmngrController extends Controller
     public function destroy($id)
     {
         $user = Usersmngr::find($id);
-    
+
         // Sprawdź, czy użytkownik nie jest administratorem
         if ($user->usertype !== 'admin') {
-            Usersmngr::destroy($id);
-            return redirect('usersmngr')->with('flash_message', 'Usunięto użytkownika');
+            $user->delete();
+            return redirect()->route('usersmngr.index')->with('flash_message', 'Usunięto użytkownika');
         } else {
-            return redirect('usersmngr')->with('error_message', 'Nie można usunąć konta administratora');
+            return redirect()->route('usersmngr.index')->with('error_message', 'Nie można usunąć konta administratora');
         }
     }
 }

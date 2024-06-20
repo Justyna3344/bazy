@@ -29,7 +29,13 @@
                   <td>{{ $item->id }}</td>
                   <td>{{ $item->name }}</td>
                   <td>{{ $item->email }}</td>
-                  <td>{{ $item->usertype }}</td>
+                  <td>@if($item->usertype == 'user')
+                    Zwykły użytkownik
+                      @elseif($item->usertype == 'admin')
+                    Administrator
+                      @else
+                    Nieznany typ użytkownika
+                    @endif</td>
                   <td>
                     <a href="{{ route('usersmngr.show', $item->id) }}" title="Szczegóły">
                       <button class="btn btn-info btn-sm"><i class="fa fa-eye" aria-hidden="true"></i> Szczegóły</button>

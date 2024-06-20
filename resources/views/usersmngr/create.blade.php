@@ -1,4 +1,5 @@
 @extends('layouts.app')
+
 @section('content')
   
 <div class="card" style="margin:20px;">
@@ -7,15 +8,23 @@
        
       <form action="{{ route('usersmngr.store') }}" method="post">
         @csrf
-        <label>Imie</label></br>
-        <input type="text" name="name" id="name" class="form-control"></br>
-        <label>Adres e-mail</label></br>
-        <input type="text" name="email" id="email" class="form-control"></br>
-        <label>Hasło</label></br>
-        <input type="password" name="password" id="password" class="form-control"></br>
-        <label>Typ użytkownika</label></br>
-        <input type="text" name="usertype" id="usertype" class="form-control"></br>
-        <input type="submit" value="Save" class="btn btn-success"></br>
+        <div class="form-group">
+          <label for="name">Imię</label>
+          <input type="text" name="name" id="name" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="email">Adres e-mail</label>
+          <input type="email" name="email" id="email" class="form-control" required>
+        </div>
+        <div class="form-group">
+          <label for="password">Hasło</label>
+          <input type="password" name="password" id="password" class="form-control">
+        </div>
+        <div class="form-group">
+          <label for="usertype">Typ użytkownika</label>
+          <input type="text" name="usertype" id="usertype" class="form-control">
+        </div>
+        <button type="submit" class="btn btn-success">Zapisz</button>
       </form>
     
   </div>

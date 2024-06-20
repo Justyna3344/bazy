@@ -13,28 +13,14 @@
         <select name="train_type" id="train_type" class="form-control">
             <option value="ekspresowy">Ekspresowy</option>
             <option value="intercity">InterCity</option>
-            <option value="regionalny">Regionalny</option>
-            <!-- Dodaj inne opcje -->
+            <option value="cargo">Cargo</option>
         </select><br>
         
         <label>Przystanek początkowy:</label><br>
-        <select name="departure_station" id="departure_station" class="form-control">
-            <option value="krakow">Kraków</option>
-            <option value="warszawa">Warszawa</option>
-            <option value="katowice">Katowice</option>
-            <option value="poznan">Poznań</option>
-            <option value="gdansk">Gdańsk</option>
-            <!-- Dodaj inne opcje -->
-        </select><br>
+        <input type="text" name="departure_station" id="departure_station" class="form-control"><br>
         
         <label>Przystanek docelowy:</label><br>
-        <select name="arrival_station" id="arrival_station" class="form-control">
-            <option value="krakow">Kraków</option>
-            <option value="warszawa">Warszawa</option>
-            <option value="katowice">Katowice</option>
-            <option value="poznan">Poznań</option>
-            <option value="gdansk">Gdańsk</option>
-        </select><br>
+        <input type="text" name="arrival_station" id="arrival_station" class="form-control"><br>
         
         <label>Data i godzina odjazdu:</label><br>
         <input type="datetime-local" name="departure_time" id="departure_time" class="form-control"><br>
@@ -45,7 +31,7 @@
         <label>Cena:</label><br>
         <input type="text" name="price" id="price" class="form-control"><br>
         
-        <input type="submit" value="Save" class="btn btn-success"><br>
+        <input type="submit" value="Zapisz" class="btn btn-success"><br>
     </form>
     
   </div>

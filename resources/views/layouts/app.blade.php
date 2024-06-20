@@ -20,6 +20,26 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
 
+
+                <ul class="navbar-nav me-auto">
+                        @if(Auth::check() && Auth::user()->usertype == 'user')
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{ route('tickets') }}">{{ __('Moje bilety') }}</a>
+                            </li>
+                            <li class="nav-item">
+                            <a class="nav-link" href="{{ route('usersmngr.index') }}">{{ __('Ustawienia konta') }}</a>
+
+                            </li>
+                        @endif
+                    </ul>
+
+
+
+
+
+
+
+
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav me-auto">
